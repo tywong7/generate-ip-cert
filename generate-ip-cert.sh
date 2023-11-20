@@ -16,21 +16,26 @@ x509_extensions = v3_req
 prompt = no
 
 [req_distinguished_name]
-countryName = XX
-stateOrProvinceName = N/A
-localityName = N/A
-organizationName = Self-signed certificate
-commonName = $IP: Self-signed certificate
+countryName = HK
+stateOrProvinceName = HK
+localityName = HK
+organizationName = CSD certificate
+commonName = $IP: CSD certificate
 
 [req_ext]
 subjectAltName = @alt_names
 
 [v3_req]
+basicConstraints = CA:TRUE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, serverAuth
 subjectAltName = @alt_names
 
 [alt_names]
 IP.1 = $IP
 " > san.cnf
+
+
 
 openssl req -x509 -nodes -days 1460 -newkey rsa:2048 -keyout key.pem -out cert.pem -config san.cnf
 rm san.cnf
