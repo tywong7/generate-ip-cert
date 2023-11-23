@@ -38,4 +38,6 @@ IP.1 = $IP
 
 
 openssl req -x509 -nodes -days 1460 -newkey rsa:2048 -keyout key.pem -out cert.pem -config san.cnf
+openssl x509 -outform der -in cert.pem -out cert.crt
+
 rm san.cnf
